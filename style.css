@@ -446,16 +446,6 @@ h4 {
   transition: opacity 0.3s ease;
 }
 
-.social-icon:nth-child(1)::before {
-  content: "f";
-} /* Facebook */
-.social-icon:nth-child(2)::before {
-  content: "📷";
-} /* Instagram */
-.social-icon:nth-child(3)::before {
-  content: "𝕏";
-} /* Twitter/X */
-
 .social-icon:hover::before {
   opacity: 1;
 }

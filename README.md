@@ -1,42 +1,34 @@
-Project Title: RalphTech
-Name of your landing page project:
+Project Title:
+DevlingDevelopment
 
 Description:
-Explain:
-What the landing page is about
-Who it is for
-What problem it solves or purpose it serves
-(3–5 sentences only)
+What the landing page is about? 
+    - The laning page is all about a business for developing websites, applications, and 3d models for people to commission from the team. This landing page is targetting for customers who want to be able to create functioning websites, working applicaitons, and detailed models. This solves the issue of other people who are in need of a development team to be able to create their ideas into reality.
 
-Technologies Used:
-Example:
-HTML5
-CSS3
-JavaScript (optional)
-
+Technologies Used: 
+    - HTML5 
+    - CSS3
 
 Features:
-List at least 3 features of your landing page.
-
-Example:
-Responsive layout
-Call-to-action button
-Clean UI design
+List at least 3 features of your landing page. 
+    - Responsive design 
+    - Call-to-action button 
+    - Modern UI design 
+    - Detailed effects
 
 AI Assistance Disclosure (Required):
 Answer honestly:
-Did you use AI tools? (Yes / No)
+Did you use AI tools? (Yes / No) 
+    - YES
+
 If YES, specify:
-What AI tool you used
-What it helped you with
-(e.g., layout ideas, CSS styling, text content, debugging)
-Example:
-“I used ChatGPT to help generate CSS layout ideas and improve wording for the hero section. All code was reviewed and modified by me.”
-If NO, state:
-“This project was created without the use of AI tools.”
+What AI tool you used: 
+    - DeepSeek
+
+What it helped you with: 
+    - I used DeepSeek to assist me in the CSS, such as creating proper hovering effects, glowing effects, and other styling elements. It also helped me in creating the responsiveness for the design. All of the reviewing and modification of the code was done by myself.
 
 Learning Reflection (Short):
 Answer briefly:
-What did you learn from this activity?
-What was the most challenging part?
-(2–3 sentences)
+What did you learn from this activity? 
+    - Overall, creating a website is not an easy task. It takes time to not only code, but to also design the website to ensure that it looks pleasing and satisfying for the developer and the users. While every part of the coding is managable, I do believe that creating the styles for the HTML code is the challenging part. You have to gather fonts and elements for the design and you ahve to ensure that it will work well with the design and theme you have chosen.
