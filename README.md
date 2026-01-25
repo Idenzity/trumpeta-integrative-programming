@@ -16,7 +16,7 @@ List at least 3 features of your landing page.
   - Responsive design 
   - Call-to-action button 
   - Modern UI design
-  - - Detailed effects
+  - Detailed effects
 
 AI Assistance Disclosure (Required): 
   Answer honestly: 
