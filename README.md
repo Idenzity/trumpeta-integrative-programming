@@ -17,6 +17,9 @@ List at least 3 features of your landing page.
   - Call-to-action button 
   - Modern UI design
   - Detailed effects
+  - Multi-page navigation 
+  - Consistent design for the pages
+  - requires to fill out the forms for login and signup
 
 AI Assistance Disclosure (Required): 
   Answer honestly: 
@@ -27,11 +30,15 @@ If YES, specify: What AI tool you used:
   - DeepSeek
 
 What it helped you with: 
-  - I used DeepSeek to assist me in the CSS, such as creating proper hovering effects, glowing effects, and other styling elements. It also helped me in creating the responsiveness for the design. 
-  All of the reviewing and modification of the code was done by myself.
+  - I used DeepSeek to assist me in the CSS, such as creating proper hovering effects, glowing effects, and other styling elements. It also helped me in creating the responsiveness for the design. All of the reviewing and modification of the code was done by myself.
 
 Learning Reflection (Short): 
 Answer briefly: What did you learn from this activity? 
   - Overall, creating a website is not an easy task. It takes time to not only code, but to also design the website to ensure that it looks pleasing and satisfying for the developer and the users. 
   While every part of the coding is managable, I do believe that creating the styles for the HTML code is the challenging part. You have to gather fonts and elements for the design and you have to ensure
   that it will work well with the design and theme you have chosen.
+
+Pages Adde:
+List the pages you added and what each page is for:
+  - login.html – for the login UI page
+  - signup.html – for the signup UI page
