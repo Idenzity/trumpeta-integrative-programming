@@ -1079,3 +1079,42 @@ ul li a {
 .button-section {
   animation: pulse 2s infinite;
 }
+
+@media (max-width: 768px) {
+  .simple-header,
+  .settings-main,
+  .simple-footer {
+    padding: 1rem;
+  }
+  
+  .header-container {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+  
+  .page-title,
+  .settings-form {
+    padding: 1.5rem;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .cancel-btn,
+  .save-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title h2 {
+    font-size: 1.5rem;
+  }
+  
+  .setting-item {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+  }
+}
