@@ -95,3 +95,34 @@ function addDeleteFunction(button) {
 document.querySelectorAll(".delete-btn").forEach((button) => {
   addDeleteFunction(button);
 });
+
+// Add user function
+document.getElementById("addUserForm").addEventListener("submit", function (e) {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const role = document.getElementById("role").value;
+
+  const table = document.getElementById("userTable");
+
+  const newRow = document.createElement("tr");
+
+  newRow.innerHTML = `
+    <td></td>
+    <td>${name}</td>
+    <td>${email}</td>
+    <td>${role}</td>
+    <td><button class="delete-btn">Delete</button></td>
+  `;
+
+  table.appendChild(newRow);
+
+  // add delete function to new button
+  const deleteBtn = newRow.querySelector(".delete-btn");
+  addDeleteFunction(deleteBtn);
+
+  updateIDs();
+
+  document.getElementById("addUserForm").reset();
+});
