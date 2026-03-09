@@ -1,29 +1,53 @@
-// for login validation
+// for admin page protection
+const userRole = localStorage.getItem("userRole");
+
+if (
+  window.location.pathname.includes("admin") ||
+  window.location.pathname.includes("manage") ||
+  window.location.pathname.includes("add-user")
+) {
+  if (userRole !== "admin") {
+    alert("Access denied. Admins only.");
+    window.location.href = "login.html";
+  }
+}
+
+// for login validation + admin access
 document.addEventListener("DOMContentLoaded", function () {
   const loginForm = document.getElementById("loginForm");
 
   if (loginForm) {
     loginForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+
       const email = document.getElementById("loginEmail").value.trim();
       const password = document.getElementById("loginPassword").value.trim();
 
       if (email === "" || password === "") {
-        e.preventDefault();
         alert("All fields are required.");
         return;
       }
 
       const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
       if (!email.match(emailPattern)) {
-        e.preventDefault();
         alert("Please enter a valid email address.");
         return;
       }
 
       if (password.length < 6) {
-        e.preventDefault();
         alert("Password must be at least 6 characters long.");
         return;
+      }
+
+      // ADMIN EMAIL CHECK
+      const adminEmail = "admin@delvingdevelopment.com";
+
+      if (email === adminEmail) {
+        localStorage.setItem("userRole", "admin");
+        window.location.href = "admin.html";
+      } else {
+        localStorage.setItem("userRole", "user");
+        window.location.href = "profile.html";
       }
     });
   }
