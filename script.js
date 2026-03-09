@@ -4,13 +4,13 @@ if (!localStorage.getItem("users")) {
     {
       name: "Ralph",
       email: "ralph@gmail.com",
-      password: "123456",
+      password: "admin123",
       role: "Admin"
     },
     {
       name: "Steve",
       email: "steve@gmail.com",
-      password: "im_steving_it",
+      password: "123456",
       role: "User"
     }
   ];
