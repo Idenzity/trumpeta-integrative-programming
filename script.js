@@ -75,3 +75,23 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+// for manage data delete option
+function updateIDs() {
+  const rows = document.querySelectorAll("#userTable tr");
+
+  rows.forEach((row, index) => {
+    row.cells[0].textContent = index + 1;
+  });
+}
+function addDeleteFunction(button) {
+  button.addEventListener("click", function () {
+    const row = this.parentElement.parentElement;
+    row.remove();
+
+    updateIDs();
+  });
+}
+document.querySelectorAll(".delete-btn").forEach((button) => {
+  addDeleteFunction(button);
+});

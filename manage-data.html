@@ -3,11 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>Manage Users</title>
-
-    <link rel="stylesheet" href="manage-users.css" />
-
+    <link rel="stylesheet" href="style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Exo+2:wght@300;400;600&display=swap"
       rel="stylesheet"
@@ -27,12 +24,13 @@
     <section class="container">
       <h2>Manage Users</h2>
 
-      <table>
+      <table class="manage-table">
         <thead>
           <tr>
             <th>ID</th>
             <th>Name</th>
             <th>Email</th>
+            <th>Role</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -40,27 +38,22 @@
         <tbody id="userTable">
           <tr>
             <td>1</td>
-            <td>Ana</td>
-            <td>ana@email.com</td>
-            <td><button class="deleteBtn">Delete</button></td>
+            <td>Ralph</td>
+            <td>ralph@gmail.com</td>
+            <td>Admin</td>
+            <td><button class="delete-btn">Delete</button></td>
           </tr>
 
           <tr>
             <td>2</td>
-            <td>Juan</td>
-            <td>juan@email.com</td>
-            <td><button class="deleteBtn">Delete</button></td>
+            <td>Steve</td>
+            <td>steve@gmail.com</td>
+            <td>User</td>
+            <td><button class="delete-btn">Delete</button></td>
           </tr>
         </tbody>
       </table>
     </section>
-
-    <script>
-      document.querySelectorAll(".deleteBtn").forEach((button) => {
-        button.addEventListener("click", function () {
-          this.parentElement.parentElement.remove();
-        });
-      });
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
