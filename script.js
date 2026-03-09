@@ -1,152 +1,215 @@
-// for admin page protection
-const userRole = localStorage.getItem("userRole");
+//default users for testing
+if (!localStorage.getItem("users")) {
+  const defaultUsers = [
+    {
+      name: "Ralph",
+      email: "ralph@gmail.com",
+      password: "123456",
+      role: "Admin"
+    },
+    {
+      name: "Steve",
+      email: "steve@gmail.com",
+      password: "im_steving_it",
+      role: "User"
+    }
+  ];
 
-if (
-  window.location.pathname.includes("admin") ||
-  window.location.pathname.includes("manage") ||
-  window.location.pathname.includes("add-user")
-) {
-  if (userRole !== "admin") {
-    alert("Access denied. Admins only.");
-    window.location.href = "login.html";
-  }
+  localStorage.setItem("users", JSON.stringify(defaultUsers));
 }
 
-// for login validation + admin access
+// admin page protection
 document.addEventListener("DOMContentLoaded", function () {
+
+  const role = localStorage.getItem("userRole");
+
+  if (
+    window.location.pathname.includes("admin") ||
+    window.location.pathname.includes("manage") ||
+    window.location.pathname.includes("add-user")
+  ) {
+    if (role !== "Admin") {
+      alert("Access denied. Admins only.");
+      window.location.href = "login.html";
+    }
+  }
+
+});
+
+// login system
+document.addEventListener("DOMContentLoaded", function () {
+
   const loginForm = document.getElementById("loginForm");
 
-  if (loginForm) {
-    loginForm.addEventListener("submit", function (e) {
-      e.preventDefault();
+  if (!loginForm) return;
 
-      const email = document.getElementById("loginEmail").value.trim();
-      const password = document.getElementById("loginPassword").value.trim();
+  loginForm.addEventListener("submit", function (e) {
 
-      if (email === "" || password === "") {
-        alert("All fields are required.");
-        return;
-      }
+    e.preventDefault();
 
-      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-      if (!email.match(emailPattern)) {
-        alert("Please enter a valid email address.");
-        return;
-      }
+    const email = document.getElementById("loginEmail").value.trim();
+    const password = document.getElementById("loginPassword").value.trim();
 
-      if (password.length < 6) {
-        alert("Password must be at least 6 characters long.");
-        return;
-      }
+    const users = JSON.parse(localStorage.getItem("users"));
 
-      // ADMIN EMAIL CHECK
-      const adminEmail = "admin@delvingdevelopment.com";
+    const user = users.find(
+      u => u.email === email && u.password === password
+    );
 
-      if (email === adminEmail) {
-        localStorage.setItem("userRole", "admin");
-        window.location.href = "admin.html";
-      } else {
-        localStorage.setItem("userRole", "user");
-        window.location.href = "profile.html";
-      }
-    });
-  }
+    if (!user) {
+      alert("Invalid email or password.");
+      return;
+    }
+
+    localStorage.setItem("userRole", user.role);
+
+    if (user.role === "Admin") {
+      window.location.href = "admin.html";
+    } else {
+      window.location.href = "profile.html";
+    }
+
+  });
+
 });
 
-// for signup validation
+// signup system
 document.addEventListener("DOMContentLoaded", function () {
+
   const signupForm = document.getElementById("signupForm");
 
-  if (signupForm) {
-    signupForm.addEventListener("submit", function (e) {
-      const name = document.getElementById("signupName").value.trim();
-      const email = document.getElementById("signupEmail").value.trim();
-      const password = document.getElementById("signupPassword").value.trim();
-      const confirmPassword = document
-        .getElementById("signupConfirmPassword")
-        .value.trim();
+  if (!signupForm) return;
 
-      if (!name || !email || !password || !confirmPassword) {
-        e.preventDefault();
-        alert("All fields are required.");
-        return;
-      }
+  signupForm.addEventListener("submit", function (e) {
 
-      if (name.length < 3) {
-        e.preventDefault();
-        alert("Full Name must be at least 3 characters long.");
-        return;
-      }
+    e.preventDefault();
 
-      const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
-      if (!email.match(emailPattern)) {
-        e.preventDefault();
-        alert("Please enter a valid email address.");
-        return;
-      }
+    const name = document.getElementById("signupName").value.trim();
+    const email = document.getElementById("signupEmail").value.trim();
+    const password = document.getElementById("signupPassword").value.trim();
+    const confirmPassword =
+      document.getElementById("signupConfirmPassword").value.trim();
 
-      if (password.length < 6) {
-        e.preventDefault();
-        alert("Password must be at least 6 characters long.");
-        return;
-      }
+    if (!name || !email || !password || !confirmPassword) {
+      alert("All fields are required.");
+      return;
+    }
 
-      if (password !== confirmPassword) {
-        e.preventDefault();
-        alert("Passwords do not match.");
-        return;
-      }
+    if (password !== confirmPassword) {
+      alert("Passwords do not match.");
+      return;
+    }
+
+    let users = JSON.parse(localStorage.getItem("users"));
+
+    users.push({
+      name: name,
+      email: email,
+      password: password,
+      role: "User"
     });
-  }
+
+    localStorage.setItem("users", JSON.stringify(users));
+
+    alert("Account created! Please login.");
+    window.location.href = "login.html";
+
+  });
+
 });
 
-// for manage data delete option
-function updateIDs() {
-  const rows = document.querySelectorAll("#userTable tr");
+// logout
+function logout() {
 
-  rows.forEach((row, index) => {
-    row.cells[0].textContent = index + 1;
-  });
+  localStorage.removeItem("userRole");
+  window.location.href = "login.html";
+
 }
-function addDeleteFunction(button) {
-  button.addEventListener("click", function () {
-    const row = this.parentElement.parentElement;
-    row.remove();
 
-    updateIDs();
-  });
-}
-document.querySelectorAll(".delete-btn").forEach((button) => {
-  addDeleteFunction(button);
-});
-
-// Add user function
-document.getElementById("addUserForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const name = document.getElementById("name").value;
-  const email = document.getElementById("email").value;
-  const role = document.getElementById("role").value;
+// load user into table
+document.addEventListener("DOMContentLoaded", function () {
 
   const table = document.getElementById("userTable");
 
-  const newRow = document.createElement("tr");
+  if (!table) return;
 
-  newRow.innerHTML = `
-    <td></td>
-    <td>${name}</td>
-    <td>${email}</td>
-    <td>${role}</td>
-    <td><button class="delete-btn">Delete</button></td>
-  `;
+  const users = JSON.parse(localStorage.getItem("users"));
 
-  table.appendChild(newRow);
+  table.innerHTML = "";
 
-  // add delete function to new button
-  const deleteBtn = newRow.querySelector(".delete-btn");
-  addDeleteFunction(deleteBtn);
+  users.forEach((user, index) => {
 
-  updateIDs();
+    const row = document.createElement("tr");
 
-  document.getElementById("addUserForm").reset();
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td>${user.name}</td>
+      <td>${user.email}</td>
+      <td>${user.role}</td>
+      <td><button class="delete-btn">Delete</button></td>
+    `;
+
+    table.appendChild(row);
+
+  });
+
+  attachDeleteButtons();
+
+});
+
+// delete user
+function attachDeleteButtons() {
+
+  const buttons = document.querySelectorAll(".delete-btn");
+
+  buttons.forEach((btn, index) => {
+
+    btn.addEventListener("click", function () {
+
+      let users = JSON.parse(localStorage.getItem("users"));
+
+      users.splice(index, 1);
+
+      localStorage.setItem("users", JSON.stringify(users));
+
+      location.reload();
+
+    });
+
+  });
+
+}
+
+// add user
+document.addEventListener("DOMContentLoaded", function () {
+
+  const form = document.getElementById("addUserForm");
+
+  if (!form) return;
+
+  form.addEventListener("submit", function (e) {
+
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const role = document.getElementById("role").value;
+
+    let users = JSON.parse(localStorage.getItem("users"));
+
+    users.push({
+      name: name,
+      email: email,
+      password: "123456",
+      role: role
+    });
+
+    localStorage.setItem("users", JSON.stringify(users));
+
+    alert("User added!");
+
+    location.reload();
+
+  });
+
 });
