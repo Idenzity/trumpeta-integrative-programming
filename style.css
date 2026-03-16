@@ -1024,7 +1024,7 @@ body {
 .header h1 {
   font-family: "Orbitron", sans-serif;
   background: linear-gradient(90deg, #00d9ff, #ff00aa);
-  -webkit-background-clip: text;
+  background-clip: text;
   color: transparent;
 }
 
