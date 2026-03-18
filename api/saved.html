@@ -5,13 +5,21 @@
     <title>Saved Weather</title>
     <link rel="stylesheet" href="apistyle.css" />
   </head>
+
   <body>
     <div class="weather-container">
       <h1 class="weather-title">Saved Weather</h1>
+
+      <button onclick="goBack()" class="back-btn">← Back to Weather</button>
+
       <div id="savedList"></div>
     </div>
 
     <script>
+      function goBack() {
+        window.location.href = "api-page.html";
+      }
+
       function loadSaved() {
         const saved = JSON.parse(localStorage.getItem("weatherData")) || [];
         const container = document.getElementById("savedList");
@@ -24,14 +32,14 @@
         container.innerHTML = saved
           .map(
             (item) => `
-      <div class="weather-result">
-        <h2>${item.city}, ${item.country}</h2>
-        <p>Temperature: ${item.temperature} °C</p>
-        <p>Wind Speed: ${item.windspeed} km/h</p>
-        <p>Weather Code: ${item.weathercode}</p>
-        <button onclick="deleteItem('${item.city}')">Delete</button>
-      </div>
-    `,
+    <div class="weather-result">
+      <h2>${item.city}, ${item.country}</h2>
+      <p>Temperature: ${item.temperature} °C</p>
+      <p>Wind Speed: ${item.windspeed} km/h</p>
+      <p>Weather Code: ${item.weathercode}</p>
+      <button onclick="deleteItem('${item.city}')">Delete</button>
+    </div>
+  `,
           )
           .join("");
       }
