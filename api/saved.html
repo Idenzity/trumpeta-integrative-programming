@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Saved Weather</title>
+    <link rel="stylesheet" href="apistyle.css" />
+  </head>
+  <body>
+    <div class="weather-container">
+      <h1 class="weather-title">Saved Weather</h1>
+      <div id="savedList"></div>
+    </div>
+
+    <script>
+      function loadSaved() {
+        const saved = JSON.parse(localStorage.getItem("weatherData")) || [];
+        const container = document.getElementById("savedList");
+
+        if (saved.length === 0) {
+          container.innerHTML = "<p>No saved items yet.</p>";
+          return;
+        }
+
+        container.innerHTML = saved
+          .map(
+            (item) => `
+      <div class="weather-result">
+        <h2>${item.city}, ${item.country}</h2>
+        <p>Temperature: ${item.temperature} °C</p>
+        <p>Wind Speed: ${item.windspeed} km/h</p>
+        <p>Weather Code: ${item.weathercode}</p>
+        <button onclick="deleteItem('${item.city}')">Delete</button>
+      </div>
+    `,
+          )
+          .join("");
+      }
+
+      function deleteItem(city) {
+        let saved = JSON.parse(localStorage.getItem("weatherData")) || [];
+
+        saved = saved.filter((item) => item.city !== city);
+
+        localStorage.setItem("weatherData", JSON.stringify(saved));
+
+        loadSaved();
+      }
+
+      loadSaved();
+    </script>
+  </body>
+</html>
