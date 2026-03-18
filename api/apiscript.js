@@ -31,7 +31,6 @@ async function getWeather() {
     const weatherData = await weatherResponse.json();
     const weather = weatherData.current_weather;
 
-    // 🧠 Store current data (for saving)
     const currentWeatherData = {
       city: cityName,
       country: country,
@@ -51,4 +50,23 @@ async function getWeather() {
     resultDiv.innerHTML = "Failed to retrieve weather data.";
     console.error(error);
   }
+}
+
+function saveWeather(data) {
+  let saved = localStorage.getItem("weatherData");
+
+  saved = saved ? JSON.parse(saved) : [];
+
+  const exists = saved.some((item) => item.city === data.city);
+
+  if (exists) {
+    alert("Already saved!");
+    return;
+  }
+
+  saved.push(data);
+
+  localStorage.setItem("weatherData", JSON.stringify(saved));
+
+  alert("Saved successfully!");
 }
