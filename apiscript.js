@@ -29,15 +29,24 @@ async function getWeather() {
     );
 
     const weatherData = await weatherResponse.json();
-
     const weather = weatherData.current_weather;
 
+    // 🧠 Store current data (for saving)
+    const currentWeatherData = {
+      city: cityName,
+      country: country,
+      temperature: weather.temperature,
+      windspeed: weather.windspeed,
+      weathercode: weather.weathercode,
+    };
+
     resultDiv.innerHTML = `
-            <h2>${cityName}, ${country}</h2>
-            <p>Temperature: ${weather.temperature} °C</p>
-            <p>Wind Speed: ${weather.windspeed} km/h</p>
-            <p>Weather Code: ${weather.weathercode}</p>
-        `;
+      <h2>${cityName}, ${country}</h2>
+      <p>Temperature: ${weather.temperature} °C</p>
+      <p>Wind Speed: ${weather.windspeed} km/h</p>
+      <p>Weather Code: ${weather.weathercode}</p>
+      <button onclick='saveWeather(${JSON.stringify(currentWeatherData)})'>Save</button>
+    `;
   } catch (error) {
     resultDiv.innerHTML = "Failed to retrieve weather data.";
     console.error(error);
