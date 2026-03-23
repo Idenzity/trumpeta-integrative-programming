@@ -2,25 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Project Explorer</title>
+    <title>Developer Finder</title>
     <link rel="stylesheet" href="apistyle.css" />
   </head>
 
   <body>
-    <div class="project-container">
-      <h1 class="project-title">Project Explorer</h1>
-      <p class="project-subtitle">
-        Enter a developer or team name to explore projects
-      </p>
+    <div class="dev-container">
+      <h1 class="dev-title">Developer Finder</h1>
+      <p class="dev-subtitle">Find developers for your project.</p>
 
-      <div class="project-search">
-        <input type="text" id="cityInput" placeholder="Enter GitHub username" />
+      <div class="dev-search">
+        <input type="text" id="nameInput" placeholder="Enter GitHub username" />
         <button onclick="getProjects()">Search</button>
       </div>
 
-      <a href="saved.html" class="saved-button">View Saved Projects</a>
+      <a href="saved.html" class="saved-button">View Saved Developers</a>
 
-      <div id="result" class="project-result"></div>
+      <div id="result" class="dev-result"></div>
     </div>
 
     <script src="apiscript.js"></script>

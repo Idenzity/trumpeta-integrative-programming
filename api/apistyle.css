@@ -19,7 +19,7 @@ body {
 
 /* MAIN CARD */
 
-.project-container {
+.dev-container {
   width: 100%;
   max-width: 450px;
   padding: 40px;
@@ -39,7 +39,7 @@ body {
 
 /* TITLE */
 
-.project-title {
+.dev-title {
   font-family: "Orbitron", sans-serif;
 
   font-size: 32px;
@@ -51,14 +51,14 @@ body {
   margin-bottom: 10px;
 }
 
-.project-subtitle {
+.dev-subtitle {
   color: #a0a0cc;
   margin-bottom: 30px;
 }
 
 /* SEARCH BAR */
 
-.project-search {
+.dev-search {
   display: flex;
   gap: 10px;
   justify-content: center;
@@ -66,7 +66,7 @@ body {
 
 /* INPUT */
 
-.project-search input {
+.dev-search input {
   flex: 1;
 
   padding: 12px 14px;
@@ -86,14 +86,14 @@ body {
   transition: 0.3s;
 }
 
-.project-search input:focus {
+.dev-search input:focus {
   border-color: #00d9ff;
   box-shadow: 0 0 8px rgba(0, 217, 255, 0.4);
 }
 
 /* BUTTON */
 
-.project-search button {
+.dev-search button {
   padding: 12px 18px;
 
   border: none;
@@ -111,7 +111,7 @@ body {
   transition: 0.3s;
 }
 
-.project-search button:hover {
+.dev-search button:hover {
   transform: translateY(-2px);
 
   box-shadow: 0 6px 12px rgba(0, 217, 255, 0.4);
@@ -141,13 +141,13 @@ body {
   text-decoration: none;
 }
 
-.project-search:hover {
+.dev-search:hover {
   transform: translateY(-2px);
 
   box-shadow: 0 6px 12px rgba(0, 217, 255, 0.4);
 }
 
-.project-result {
+.dev-result {
   margin-top: 25px;
 
   padding: 20px;
@@ -161,7 +161,7 @@ body {
   color: #e0e0ff;
 }
 
-.project-result h2 {
+.dev-result h2 {
   font-family: "Orbitron", sans-serif;
 
   color: #00d9ff;
@@ -169,7 +169,7 @@ body {
   margin-bottom: 10px;
 }
 
-.project-result p {
+.dev-result p {
   color: #a0a0cc;
 
   font-size: 17px;
