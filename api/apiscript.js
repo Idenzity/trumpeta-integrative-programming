@@ -44,7 +44,7 @@ async function getWeather() {
       <p>Temperature: ${weather.temperature} °C</p>
       <p>Wind Speed: ${weather.windspeed} km/h</p>
       <p>Weather Code: ${weather.weathercode}</p>
-      <button onclick='saveWeather(${JSON.stringify(currentWeatherData)})'>Save</button>
+      <button class="save-btn" onclick='saveWeather(${JSON.stringify(currentWeatherData)})'>Save</button>
     `;
   } catch (error) {
     resultDiv.innerHTML = "Failed to retrieve weather data.";
