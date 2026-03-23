@@ -2,15 +2,15 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Saved Projects</title>
+    <title>Saved Developers</title>
     <link rel="stylesheet" href="apistyle.css" />
   </head>
 
   <body>
-    <div class="project-container">
-      <h1 class="project-title">Saved Projects</h1>
+    <div class="weather-container">
+      <h1 class="weather-title">Saved Developers</h1>
 
-      <button onclick="goBack()" class="back-btn">← Back to Projects</button>
+      <button onclick="goBack()" class="back-btn">← Back</button>
 
       <div id="savedList"></div>
     </div>
@@ -21,37 +21,36 @@
       }
 
       function loadSaved() {
-        const saved = JSON.parse(localStorage.getItem("projectData")) || [];
+        const saved = JSON.parse(localStorage.getItem("developerData")) || [];
         const container = document.getElementById("savedList");
 
         if (saved.length === 0) {
-          container.innerHTML = "<p>No saved projects yet.</p>";
+          container.innerHTML = "<p>No saved developers yet.</p>";
           return;
         }
 
         container.innerHTML = saved
           .map(
-            (item) => `
-              <div class="project-result">
-                <h2>${item.name}</h2>
-                <p><strong>Developer:</strong> ${item.username}</p>
-                <p>${item.description}</p>
-                <p>Language: ${item.language}</p>
-                <button class="delete-btn" onclick="deleteItem('${item.name}', '${item.username}')">Delete</button>
+            (dev) => `
+              <div class="weather-result">
+                <img src="${dev.avatar}" width="80" style="border-radius:50%; margin-bottom:10px;" />
+                <h2>${dev.username}</h2>
+                <p>Projects: ${dev.repoCount}</p>
+                <a href="${dev.profile}" target="_blank">View Profile</a>
+                <br/><br/>
+                <button class="delete-btn" onclick="deleteDeveloper('${dev.username}')">Delete</button>
               </div>
             `,
           )
           .join("");
       }
 
-      function deleteItem(name, username) {
-        let saved = JSON.parse(localStorage.getItem("projectData")) || [];
+      function deleteDeveloper(username) {
+        let saved = JSON.parse(localStorage.getItem("developerData")) || [];
 
-        saved = saved.filter(
-          (item) => !(item.name === name && item.username === username),
-        );
+        saved = saved.filter((dev) => dev.username !== username);
 
-        localStorage.setItem("projectData", JSON.stringify(saved));
+        localStorage.setItem("developerData", JSON.stringify(saved));
 
         loadSaved();
       }
