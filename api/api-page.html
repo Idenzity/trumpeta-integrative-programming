@@ -2,21 +2,23 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>Weather App</title>
+    <title>Project Explorer</title>
     <link rel="stylesheet" href="apistyle.css" />
   </head>
 
   <body>
     <div class="weather-container">
-      <h1 class="weather-title">Weather Scanner</h1>
-      <p class="weather-subtitle">Enter a city to check the weather</p>
+      <h1 class="weather-title">Project Explorer</h1>
+      <p class="weather-subtitle">
+        Enter a developer or team name to explore projects
+      </p>
 
       <div class="weather-search">
-        <input type="text" id="cityInput" placeholder="Enter city name" />
-        <button onclick="getWeather()">Search</button>
+        <input type="text" id="cityInput" placeholder="Enter GitHub username" />
+        <button onclick="getProjects()">Search</button>
       </div>
 
-      <a href="saved.html" class="saved-button">View Saved Items</a>
+      <a href="saved.html" class="saved-button">View Saved Projects</a>
 
       <div id="result" class="weather-result"></div>
     </div>
