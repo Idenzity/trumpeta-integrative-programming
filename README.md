@@ -7,8 +7,8 @@ Activity name (eg Landing Page).
   - DevlingDevelopment
   
 Description Explain: What the landing page is about Who it is for What problem it solves or purpose it serves (3–5 sentences only)
-  - The laning page is all about a business for developing websites, applications, and 3d models for people to commission from the team. 
-    This landing page is targetting for customers who want to be able to create functioning websites, working applicaitons, and detailed models. 
+  - The landing page is all about a business for developing websites, applications, and 3d models for people to commission from the team. 
+    This landing page is targeting for customers who want to be able to create functioning websites, working applications, and detailed models. 
     This solves the issue of other people who are in need of a development team to be able to create their ideas into reality.
 
 Technologies Used: 
