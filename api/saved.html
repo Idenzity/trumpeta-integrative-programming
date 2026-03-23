@@ -7,8 +7,8 @@
   </head>
 
   <body>
-    <div class="weather-container">
-      <h1 class="weather-title">Saved Projects</h1>
+    <div class="project-container">
+      <h1 class="project-title">Saved Projects</h1>
 
       <button onclick="goBack()" class="back-btn">← Back to Projects</button>
 
@@ -32,21 +32,24 @@
         container.innerHTML = saved
           .map(
             (item) => `
-            <div class="weather-result">
-              <h2>${item.name}</h2>
-              <p>${item.description}</p>
-              <p>Language: ${item.language}</p>
-              <button class="delete-btn" onclick="deleteItem('${item.name}')">Delete</button>
-            </div>
-          `,
+              <div class="project-result">
+                <h2>${item.name}</h2>
+                <p><strong>Developer:</strong> ${item.username}</p>
+                <p>${item.description}</p>
+                <p>Language: ${item.language}</p>
+                <button class="delete-btn" onclick="deleteItem('${item.name}', '${item.username}')">Delete</button>
+              </div>
+            `,
           )
           .join("");
       }
 
-      function deleteItem(name) {
+      function deleteItem(name, username) {
         let saved = JSON.parse(localStorage.getItem("projectData")) || [];
 
-        saved = saved.filter((item) => item.name !== name);
+        saved = saved.filter(
+          (item) => !(item.name === name && item.username === username),
+        );
 
         localStorage.setItem("projectData", JSON.stringify(saved));
 

@@ -19,7 +19,7 @@ body {
 
 /* MAIN CARD */
 
-.weather-container {
+.project-container {
   width: 100%;
   max-width: 450px;
   padding: 40px;
@@ -39,7 +39,7 @@ body {
 
 /* TITLE */
 
-.weather-title {
+.project-title {
   font-family: "Orbitron", sans-serif;
 
   font-size: 32px;
@@ -51,14 +51,14 @@ body {
   margin-bottom: 10px;
 }
 
-.weather-subtitle {
+.project-subtitle {
   color: #a0a0cc;
   margin-bottom: 30px;
 }
 
 /* SEARCH BAR */
 
-.weather-search {
+.project-search {
   display: flex;
   gap: 10px;
   justify-content: center;
@@ -66,7 +66,7 @@ body {
 
 /* INPUT */
 
-.weather-search input {
+.project-search input {
   flex: 1;
 
   padding: 12px 14px;
@@ -86,14 +86,14 @@ body {
   transition: 0.3s;
 }
 
-.weather-search input:focus {
+.project-search input:focus {
   border-color: #00d9ff;
   box-shadow: 0 0 8px rgba(0, 217, 255, 0.4);
 }
 
 /* BUTTON */
 
-.weather-search button {
+.project-search button {
   padding: 12px 18px;
 
   border: none;
@@ -111,7 +111,7 @@ body {
   transition: 0.3s;
 }
 
-.weather-search button:hover {
+.project-search button:hover {
   transform: translateY(-2px);
 
   box-shadow: 0 6px 12px rgba(0, 217, 255, 0.4);
@@ -141,13 +141,13 @@ body {
   text-decoration: none;
 }
 
-.weather-search:hover {
+.project-search:hover {
   transform: translateY(-2px);
 
   box-shadow: 0 6px 12px rgba(0, 217, 255, 0.4);
 }
 
-.weather-result {
+.project-result {
   margin-top: 25px;
 
   padding: 20px;
@@ -161,7 +161,7 @@ body {
   color: #e0e0ff;
 }
 
-.weather-result h2 {
+.project-result h2 {
   font-family: "Orbitron", sans-serif;
 
   color: #00d9ff;
@@ -169,7 +169,7 @@ body {
   margin-bottom: 10px;
 }
 
-.weather-result p {
+.project-result p {
   color: #a0a0cc;
 
   font-size: 17px;
