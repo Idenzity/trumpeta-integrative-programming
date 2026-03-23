@@ -1,63 +1,55 @@
-async function getWeather() {
-  const city = document.getElementById("cityInput").value;
+async function getProjects() {
+  const username = document.getElementById("cityInput").value;
   const resultDiv = document.getElementById("result");
 
-  if (city === "") {
-    resultDiv.innerHTML = "Please enter a city name.";
+  if (username === "") {
+    resultDiv.innerHTML = "Please enter a developer/team name.";
     return;
   }
 
   try {
-    const geoResponse = await fetch(
-      `https://geocoding-api.open-meteo.com/v1/search?name=${city}`,
+    const response = await fetch(
+      `https://api.github.com/users/${username}/repos`,
     );
+    const data = await response.json();
 
-    const geoData = await geoResponse.json();
-
-    if (!geoData.results) {
-      resultDiv.innerHTML = "City not found.";
+    if (!data || data.length === 0) {
+      resultDiv.innerHTML = "No projects found.";
       return;
     }
 
-    const latitude = geoData.results[0].latitude;
-    const longitude = geoData.results[0].longitude;
-    const cityName = geoData.results[0].name;
-    const country = geoData.results[0].country;
+    resultDiv.innerHTML = data
+      .slice(0, 6)
+      .map((repo) => {
+        const projectData = {
+          name: repo.name,
+          description: repo.description || "No description available",
+          language: repo.language || "N/A",
+        };
 
-    const weatherResponse = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true`,
-    );
-
-    const weatherData = await weatherResponse.json();
-    const weather = weatherData.current_weather;
-
-    const currentWeatherData = {
-      city: cityName,
-      country: country,
-      temperature: weather.temperature,
-      windspeed: weather.windspeed,
-      weathercode: weather.weathercode,
-    };
-
-    resultDiv.innerHTML = `
-      <h2>${cityName}, ${country}</h2>
-      <p>Temperature: ${weather.temperature} °C</p>
-      <p>Wind Speed: ${weather.windspeed} km/h</p>
-      <p>Weather Code: ${weather.weathercode}</p>
-      <button class="save-btn" onclick='saveWeather(${JSON.stringify(currentWeatherData)})'>Save</button>
-    `;
+        return `
+          <div class="weather-result">
+            <h2>${repo.name}</h2>
+            <p>${repo.description || "No description available"}</p>
+            <p>Language: ${repo.language || "N/A"}</p>
+            <button class="save-btn" onclick='saveProject(${JSON.stringify(
+              projectData,
+            )})'>Save</button>
+          </div>
+        `;
+      })
+      .join("");
   } catch (error) {
-    resultDiv.innerHTML = "Failed to retrieve weather data.";
+    resultDiv.innerHTML = "Failed to retrieve projects.";
     console.error(error);
   }
 }
 
-function saveWeather(data) {
-  let saved = localStorage.getItem("weatherData");
-
+function saveProject(data) {
+  let saved = localStorage.getItem("projectData");
   saved = saved ? JSON.parse(saved) : [];
 
-  const exists = saved.some((item) => item.city === data.city);
+  const exists = saved.some((item) => item.name === data.name);
 
   if (exists) {
     alert("Already saved!");
@@ -66,7 +58,7 @@ function saveWeather(data) {
 
   saved.push(data);
 
-  localStorage.setItem("weatherData", JSON.stringify(saved));
+  localStorage.setItem("projectData", JSON.stringify(saved));
 
-  alert("Saved successfully!");
+  alert("Project saved!");
 }
