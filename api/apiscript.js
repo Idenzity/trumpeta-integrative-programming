@@ -22,13 +22,14 @@ async function getProjects() {
       .slice(0, 6)
       .map((repo) => {
         const projectData = {
+          username: username,
           name: repo.name,
           description: repo.description || "No description available",
           language: repo.language || "N/A",
         };
 
         return `
-          <div class="weather-result">
+          <div class="project-result">
             <h2>${repo.name}</h2>
             <p>${repo.description || "No description available"}</p>
             <p>Language: ${repo.language || "N/A"}</p>
