@@ -218,3 +218,28 @@ How to Use:
 Challenges Encountered:
 
 - One of the challenges in building this project was understanding how to use multiple API requests together. The application first needs to call the geocoding API to obtain the latitude and longitude of the city before requesting the weather data. Another challenge was handling errors properly, such as when the user enters an invalid city name or when the API request fails. This required implementing conditional checks and displaying appropriate messages to the user. Understanding how to process JSON responses and display the data dynamically using JavaScript was also an important learning experience.
+
+---
+
+Activity 6
+
+Project Purpose
+
+- This website is a platform for a development business that helps clients find and commission developers who can create websites, applications, and 3D models. It allows users to explore developers and shortlist them for potential projects.
+
+API Used
+
+- The system uses the GitHub API.
+
+Justification (IMPORTANT)
+Explain in 1–2 sentences:
+
+- The GitHub API is relevant because it provides real developer data, including profiles and project counts. This helps users evaluate and select developers to hire, making the system functional and aligned with its purpose.
+
+Why does this API belong in your website?
+
+- It belings to the website as it serves as a way to find developers to hire for their projects.
+
+Integration
+
+- The API is integrated by allowing users to search for a developer using their GitHub username. The system displays useful information such as the developer’s profile, number of projects, and profile link. Users can then save developers they are interested in so that they can view their profile more if they are interested on the developer.
