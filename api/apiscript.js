@@ -1,65 +1,69 @@
 async function getProjects() {
-  const username = document.getElementById("cityInput").value;
+  const username = document.getElementById("nameInput").value;
   const resultDiv = document.getElementById("result");
 
   if (username === "") {
-    resultDiv.innerHTML = "Please enter a developer/team name.";
+    resultDiv.innerHTML = "Please enter a developer name.";
     return;
   }
 
   try {
-    const response = await fetch(
+    // Get user profile
+    const userResponse = await fetch(
+      `https://api.github.com/users/${username}`,
+    );
+    const userData = await userResponse.json();
+
+    // Get repos (for count)
+    const repoResponse = await fetch(
       `https://api.github.com/users/${username}/repos`,
     );
-    const data = await response.json();
+    const repos = await repoResponse.json();
 
-    if (!data || data.length === 0) {
-      resultDiv.innerHTML = "No projects found.";
+    if (userData.message === "Not Found") {
+      resultDiv.innerHTML = "Developer not found.";
       return;
     }
 
-    resultDiv.innerHTML = data
-      .slice(0, 6)
-      .map((repo) => {
-        const projectData = {
-          username: username,
-          name: repo.name,
-          description: repo.description || "No description available",
-          language: repo.language || "N/A",
-        };
+    const developerData = {
+      username: userData.login,
+      avatar: userData.avatar_url,
+      profile: userData.html_url,
+      repoCount: repos.length,
+    };
 
-        return `
-          <div class="project-result">
-            <h2>${repo.name}</h2>
-            <p>${repo.description || "No description available"}</p>
-            <p>Language: ${repo.language || "N/A"}</p>
-            <button class="save-btn" onclick='saveProject(${JSON.stringify(
-              projectData,
-            )})'>Save</button>
-          </div>
-        `;
-      })
-      .join("");
+    resultDiv.innerHTML = `
+      <div class="weather-result">
+        <img src="${userData.avatar_url}" width="100" style="border-radius:50%; margin-bottom:10px;" />
+        <h2>${userData.login}</h2>
+        <p>Public Projects: ${repos.length}</p>
+        <a href="${userData.html_url}" target="_blank">View Profile</a>
+        <br/><br/>
+        <button class="save-btn" onclick='saveDeveloper(${JSON.stringify(
+          developerData,
+        )})'>Save Developer</button>
+      </div>
+    `;
   } catch (error) {
-    resultDiv.innerHTML = "Failed to retrieve projects.";
+    resultDiv.innerHTML = "Failed to retrieve developer data.";
     console.error(error);
   }
 }
 
-function saveProject(data) {
-  let saved = localStorage.getItem("projectData");
+function saveDeveloper(data) {
+  let saved = localStorage.getItem("developerData");
   saved = saved ? JSON.parse(saved) : [];
 
-  const exists = saved.some((item) => item.name === data.name);
+  const exists = saved.some((item) => item.username === data.username);
 
   if (exists) {
-    alert("Already saved!");
+    alert("Developer already saved!");
     return;
   }
 
   saved.push(data);
 
-  localStorage.setItem("projectData", JSON.stringify(saved));
+  localStorage.setItem("developerData", JSON.stringify(saved));
 
-  alert("Project saved!");
+  alert("Developer saved!");
 }
